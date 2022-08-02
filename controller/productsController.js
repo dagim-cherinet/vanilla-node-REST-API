@@ -16,7 +16,7 @@ async function createProduct(req, res) {
   //the actual data from the request body
   let bodyData = "";
 
-  req.on("data", (chunk) => (bodyData += chunk));
+  req.on("data", (chunk) => (bodyData += chunk.toString()));
   req.on("end", async () => {
     // product = JSON.parse(bodyData);
     // console.log(product);
