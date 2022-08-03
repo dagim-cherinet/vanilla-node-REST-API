@@ -22,10 +22,23 @@ const createProduct = (product) => {
 };
 const updateProduct = (content, id) => {
   return new Promise((resolve, reject) => {
-    const index = products.findIndex((product) => product.id === id);
+    const index = products.findIndex((product) => product.id == id);
     products[index] = { id, ...content };
     saveDataToFile("./data/products.json", products);
     resolve(products[index]);
   });
 };
-module.exports = { findAll, findOne, createProduct, updateProduct };
+const deleteProduct = (id) => {
+  return new Promise((resolve, reject) => {
+    newProducts = products.filter((item) => item.id != id);
+    saveDataToFile("./data/products.json", newProducts);
+    resolve({ msg: "product deleted successfully" });
+  });
+};
+module.exports = {
+  findAll,
+  findOne,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+};

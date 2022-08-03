@@ -47,14 +47,16 @@ async function updateProduct(req, res, id) {
         name: name || product.name,
         desc: desc || product.desc,
       };
-      const updatedProduct = await Product.updateProduct(
-        productData,
-        parseInt(id)
-      );
+      const updatedProduct = await Product.updateProduct(productData, id);
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(JSON.stringify(updatedProduct));
     });
   }
+}
+async function deleteProduct(req, res, id) {
+  const response = await Product.deleteProduct(id);
+  res.writeHead(200, { "Content-Type": "application/json" });
+  res.end(JSON.stringify(response));
 }
 async function notFound(req, res) {
   res.writeHead(404, { "Content-Type": "application/json" });
@@ -66,4 +68,5 @@ module.exports = {
   getProduct,
   createProduct,
   updateProduct,
+  deleteProduct,
 };
