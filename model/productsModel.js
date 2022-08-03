@@ -20,4 +20,12 @@ const createProduct = (product) => {
     resolve(newProduct);
   });
 };
-module.exports = { findAll, findOne, createProduct };
+const updateProduct = (content, id) => {
+  return new Promise((resolve, reject) => {
+    const index = products.findIndex((product) => product.id === id);
+    products[index] = { id, ...content };
+    saveDataToFile("./data/products.json", products);
+    resolve(products[index]);
+  });
+};
+module.exports = { findAll, findOne, createProduct, updateProduct };
